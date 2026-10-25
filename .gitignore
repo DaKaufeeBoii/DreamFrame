@@ -1,0 +1,8 @@
+hyperframes/
+**/node_modules/
+**/.renders/
+**/.cache/
+*.log
+.env
+.DS_Store
+Thumbs.db

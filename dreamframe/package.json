@@ -1,0 +1,21 @@
+{
+  "name": "dreamframe",
+  "version": "1.0.0",
+  "description": "Wind-down experience turning room photos into cinematic bedtime stories using DigitalOcean Gemma 4 and HyperFrames",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [
+    "hyperframes",
+    "digitalocean",
+    "gemma-4",
+    "bedtime-story",
+    "hacktoberfest",
+    "video-rendering"
+  ],
+  "author": "DaKaufeeBoii",
+  "license": "Apache-2.0"
+}

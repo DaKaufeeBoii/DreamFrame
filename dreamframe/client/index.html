@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DreamFrame · Cinematic Bedtime Stories for Developers</title>
+  <meta name="description" content="Turn your workspace or bedroom photo into a cinematic, personalized bedtime story powered by DigitalOcean Gemma 4 and rendered with HyperFrames.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="glow-sphere sphere-blue"></div>
+  <div class="glow-sphere sphere-purple"></div>
+  <div class="glow-sphere sphere-amber"></div>
+
+  <div class="app-container">
+    <!-- Header Navigation -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <span class="moon-icon">🌙</span>
+        </div>
+        <div class="brand-details">
+          <h1 class="brand-title">DreamFrame</h1>
+          <p class="brand-tagline">Hacktoberfest Hack Day · HyperFrames + DigitalOcean Gemma 4</p>
+        </div>
+      </div>
+      <div class="header-status">
+        <div class="status-badge" id="ai-status-badge">
+          <span class="status-dot"></span>
+          <span class="status-label" id="ai-status-text">DigitalOcean Gemma 4: Ready</span>
+        </div>
+        <div class="status-badge" id="hf-status-badge">
+          <span class="status-dot green"></span>
+          <span class="status-label">HyperFrames v0.8.195</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Grid -->
+    <main class="workspace-grid">
+      <!-- Left Column: Input & Customization -->
+      <section class="panel control-panel" aria-label="Story Generation Settings">
+        <div class="panel-header">
+          <span class="step-num">Step 1</span>
+          <h2>Your Sanctuary & Mood</h2>
+        </div>
+
+        <!-- Room Source Tabs -->
+        <div class="room-selector">
+          <label class="section-label">Select Room Environment</label>
+          <div class="preset-cards" id="preset-cards">
+            <!-- Populated via JS -->
+          </div>
+
+          <!-- Or Upload Custom Photo -->
+          <div class="upload-dropzone" id="upload-dropzone">
+            <input type="file" id="room-file-input" accept="image/*" class="file-input-hidden">
+            <div class="dropzone-content">
+              <span class="upload-icon">📷</span>
+              <p class="upload-text"><strong>Upload your own room photo</strong> or drag & drop</p>
+              <p class="upload-subtext">JPG, PNG, WebP supported</p>
+            </div>
+            <div class="upload-preview hidden" id="upload-preview">
+              <img id="preview-img" src="" alt="Selected Room Preview">
+              <button type="button" class="btn-clear-upload" id="btn-clear-upload" title="Use Presets Instead">✕</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional Room Context Note -->
+        <div class="form-group">
+          <label for="room-notes" class="section-label">Room Details (Optional)</label>
+          <input 
+            type="text" 
+            id="room-notes" 
+            class="text-input" 
+            placeholder="e.g. Rainy evening, herbal tea on desk, warm lamp"
+            value="Rainy night, dual monitors glowing soft blue, warm desk lamp"
+          >
+        </div>
+
+        <!-- Wind-Down Mood Preference -->
+        <div class="form-group">
+          <label class="section-label">Wind-Down Vibe</label>
+          <div class="mood-chips" id="mood-chips">
+            <button type="button" class="mood-chip active" data-mood="Rain Against Windowpane">🌧️ Rainy Midnight</button>
+            <button type="button" class="mood-chip" data-mood="Celestial Starry Night">✨ Starlit Alpine</button>
+            <button type="button" class="mood-chip" data-mood="Midnight Lo-Fi Solitude">☕ Cozy Lo-Fi</button>
+          </div>
+        </div>
+
+        <!-- Ambient Audio Loop Selection -->
+        <div class="form-group">
+          <label for="ambient-select" class="section-label">Ambient Audio Loop</label>
+          <div class="audio-picker">
+            <select id="ambient-select" class="select-input">
+              <option value="rain-window.mp3">Rain Against Windowpane (White Noise)</option>
+              <option value="lofi-night.mp3">Midnight Vinyl Warmth (Lo-Fi)</option>
+              <option value="starlit-breeze.mp3">Starlit Celestial Ambient (Sine Pad)</option>
+            </select>
+            <button type="button" class="btn-audio-preview" id="btn-audio-preview" title="Preview Audio">🔊 Test</button>
+          </div>
+          <audio id="audio-preview-player" class="hidden"></audio>
+        </div>
+
+        <!-- Action Button -->
+        <button type="button" class="btn-generate" id="btn-generate">
+          <span class="btn-sparkle">✨</span>
+          <span class="btn-text">Generate Bedtime Experience</span>
+        </button>
+      </section>
+
+      <!-- Right Column: Video Stage & Narrative Experience -->
+      <section class="panel player-panel" aria-label="Cinematic Video Stage">
+        <div class="panel-header">
+          <span class="step-num">Step 2</span>
+          <h2>Cinematic Wind-Down</h2>
+        </div>
+
+        <!-- Empty State Placeholder -->
+        <div class="stage-placeholder" id="stage-placeholder">
+          <div class="placeholder-graphic">
+            <span class="large-moon">🌌</span>
+          </div>
+          <h3>Ready for Tonight's Story</h3>
+          <p>Choose your room and mood on the left, then click <strong>Generate Bedtime Experience</strong> to create your personalized film with DigitalOcean Gemma 4 and HyperFrames.</p>
+          <button type="button" class="btn-quick-demo" id="btn-quick-demo">⚡ Watch Instant Demo Story</button>
+        </div>
+
+        <!-- Live Progress Indicator -->
+        <div class="stage-loading hidden" id="stage-loading">
+          <div class="loading-spinner"></div>
+          <h3 id="loading-title">Summoning DigitalOcean Gemma 4...</h3>
+          <p id="loading-desc">Analyzing room lighting and structuring poetic scenes...</p>
+          
+          <div class="pipeline-steps">
+            <div class="step-item" id="p-step-1">
+              <span class="step-icon">1</span>
+              <span class="step-text">DigitalOcean Inference (Gemma 4 31B)</span>
+            </div>
+            <div class="step-item" id="p-step-2">
+              <span class="step-icon">2</span>
+              <span class="step-text">HyperFrames HTML Composition</span>
+            </div>
+            <div class="step-item" id="p-step-3">
+              <span class="step-icon">3</span>
+              <span class="step-text">MP4 Render & Audio Muxing</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Player Display -->
+        <div class="video-container hidden" id="video-container">
+          <video id="story-video" controls playsinline preload="auto">
+            Your browser does not support the video tag.
+          </video>
+          
+          <div class="video-meta-bar">
+            <div class="meta-left">
+              <span class="meta-title" id="video-story-title">Raindrops on the Terminal Glass</span>
+              <span class="meta-tag" id="video-model-tag">DigitalOcean · Gemma 4</span>
+            </div>
+            <div class="meta-actions">
+              <a href="#" id="download-video-btn" class="btn-meta" download>⬇ Download Video</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Story Transcript & Reflection -->
+        <div class="transcript-card hidden" id="transcript-card">
+          <div class="transcript-header">
+            <h4>📖 Story Transcript</h4>
+            <span class="audio-badge" id="transcript-audio-tag">Rain Reflections</span>
+          </div>
+          <div class="transcript-scenes" id="transcript-scenes">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Attribution & Upstream Link -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <p>Built for <strong>Hacktoberfest Hack Day 2026</strong> · Powered by <strong>DigitalOcean Serverless Inference (Gemma 4)</strong> and <strong>HeyGen HyperFrames</strong>.</p>
+        <div class="footer-links">
+          <a href="https://github.com/DaKaufeeBoii/hyperframes/tree/fix/cli-dotenv-multiline-quoted-values" target="_blank" rel="noopener">Upstream Contribution (Branch: fix/cli-dotenv-multiline-quoted-values)</a>
+          <span class="divider">•</span>
+          <a href="https://github.com/heygen-com/hyperframes/issues/6075" target="_blank" rel="noopener">Resolves HyperFrames Issue #6075</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
