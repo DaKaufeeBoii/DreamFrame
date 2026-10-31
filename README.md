@@ -71,7 +71,7 @@ As part of Hacktoberfest Hack Day, a genuine upstream contribution was engineere
 * **Repository Fork**: [`DaKaufeeBoii/hyperframes`](https://github.com/DaKaufeeBoii/hyperframes)
 * **Feature Branch**: [`fix/cli-dotenv-multiline-quoted-values`](https://github.com/DaKaufeeBoii/hyperframes/tree/fix/cli-dotenv-multiline-quoted-values)
 * **Target Issue**: [HyperFrames Issue #6075 (`bug(cli): quoted multiline .env credentials are truncated to the first line`)](https://github.com/heygen-com/hyperframes/issues/6075)
-* **Commit**: `588ccc1 fix(cli): parse multiline quoted .env credentials without truncating`
+* **Commit**: `99d57a9 fix(cli): parse multiline quoted .env credentials without truncating`
 * **Changes**:
   - Enhanced [`packages/cli/src/utils/dotEnv.ts`](file:///d:/Kaufee/projects/Hacktoberfest-2026/HacktoberfestXKramer's/hyperframes/packages/cli/src/utils/dotEnv.ts) to parse multiline double- and single-quoted `.env` values (such as multiline PEM private keys, multiline JSON credentials, and multiline secret strings) without truncating at the newline.
   - Added full test coverage in [`packages/cli/src/utils/dotEnv.test.ts`](file:///d:/Kaufee/projects/Hacktoberfest-2026/HacktoberfestXKramer's/hyperframes/packages/cli/src/utils/dotEnv.test.ts) covering unquoted values, multiline quoted values, and multiline JSON payloads.
