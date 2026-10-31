@@ -66,15 +66,20 @@ Developers spend late nights staring at terminal glass and compiler logs. When i
 
 ## 🤝 Upstream Open Source Contribution
 
-As part of Hacktoberfest Hack Day, a genuine upstream contribution was engineered and submitted to the **HyperFrames** core repository:
+As part of Hacktoberfest Hack Day, official upstream contributions were engineered and submitted to the **HyperFrames** core repository:
 
-* **Repository Fork**: [`DaKaufeeBoii/hyperframes`](https://github.com/DaKaufeeBoii/hyperframes)
-* **Feature Branch**: [`fix/cli-dotenv-multiline-quoted-values`](https://github.com/DaKaufeeBoii/hyperframes/tree/fix/cli-dotenv-multiline-quoted-values)
-* **Target Issue**: [HyperFrames Issue #6075 (`bug(cli): quoted multiline .env credentials are truncated to the first line`)](https://github.com/heygen-com/hyperframes/issues/6075)
-* **Commit**: `99d57a9 fix(cli): parse multiline quoted .env credentials without truncating`
-* **Changes**:
-  - Enhanced [`packages/cli/src/utils/dotEnv.ts`](file:///d:/Kaufee/projects/Hacktoberfest-2026/HacktoberfestXKramer's/hyperframes/packages/cli/src/utils/dotEnv.ts) to parse multiline double- and single-quoted `.env` values (such as multiline PEM private keys, multiline JSON credentials, and multiline secret strings) without truncating at the newline.
-  - Added full test coverage in [`packages/cli/src/utils/dotEnv.test.ts`](file:///d:/Kaufee/projects/Hacktoberfest-2026/HacktoberfestXKramer's/hyperframes/packages/cli/src/utils/dotEnv.test.ts) covering unquoted values, multiline quoted values, and multiline JSON payloads.
+1. **Official Registry Block Contribution**:
+   * **Pull Request**: [**HyperFrames PR #6877 (`feat(registry): add dreamframe-bedtime ambient bedtime story block`)**](https://github.com/heygen-com/hyperframes/pull/6877)
+   * **Branch**: [`feat/block-dreamframe-bedtime`](https://github.com/DaKaufeeBoii/hyperframes/tree/feat/block-dreamframe-bedtime)
+   * **Component**: Packaged DreamFrame's ambient bedtime story composition as an official HyperFrames registry block with schema variables, Ken Burns pan/zoom, GSAP 3 timeline, and responsive SVG assets. Passed `hyperframes lint` with 0 errors and 0 warnings.
+
+2. **Core CLI Credentials Parser Fix**:
+   * **Feature Branch**: [`fix/cli-dotenv-multiline-quoted-values`](https://github.com/DaKaufeeBoii/hyperframes/tree/fix/cli-dotenv-multiline-quoted-values)
+   * **Target Issue**: [HyperFrames Issue #6075 (`bug(cli): quoted multiline .env credentials are truncated to the first line`)](https://github.com/heygen-com/hyperframes/issues/6075)
+   * **Commit**: `99d57a9 fix(cli): parse multiline quoted .env credentials without truncating`
+   * **Changes**:
+     - Enhanced [`packages/cli/src/utils/dotEnv.ts`](file:///d:/Kaufee/projects/Hacktoberfest-2026/HacktoberfestXKramer's/hyperframes/packages/cli/src/utils/dotEnv.ts) to parse multiline double- and single-quoted `.env` values (such as multiline PEM private keys, multiline JSON credentials, and multiline secret strings) without truncating at the newline.
+     - Added full test coverage in [`packages/cli/src/utils/dotEnv.test.ts`](file:///d:/Kaufee/projects/Hacktoberfest-2026/HacktoberfestXKramer's/hyperframes/packages/cli/src/utils/dotEnv.test.ts) covering unquoted values, multiline quoted values, and multiline JSON payloads.
 
 ---
 
